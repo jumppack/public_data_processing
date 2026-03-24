@@ -149,8 +149,6 @@ function renderCharts(data) {
     });
 
     // Chart 3: Sector Employment Shifts
-    const empArts = data.map(d => d.employed_arts);
-    const empManufacturing = data.map(d => d.employed_manufacturing);
     new Chart(document.getElementById('sectorChart').getContext('2d'), {
         type: 'doughnut',
         data: {
