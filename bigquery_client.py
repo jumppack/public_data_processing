@@ -25,10 +25,10 @@ def fetch_dashboard_data() -> list[DashboardDataRecord]:
             '{year}' as year,
             AVG(median_income) as median_income,
             AVG(median_rent) as median_rent,
-            AVG(per_capita_income) as income_per_capita,
+            AVG(income_per_capita) as income_per_capita,
             SUM(total_pop) as total_population,
-            SUM(employed_management_business_science_arts) as employed_management,
-            SUM(employed_service) as employed_service,
+            SUM(management_business_sci_arts_employed) as employed_management,
+            SUM(occupation_services) as employed_service,
             SUM(employed_manufacturing) as employed_manufacturing,
             SUM(employed_arts_entertainment_recreation_accommodation_food) as employed_arts,
             SUM(aggregate_travel_time_to_work) as aggregate_travel_time
