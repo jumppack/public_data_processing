@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumer & Demographic Trends Dashboard</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Consumer Economy Dashboards</title>
+    <link rel="stylesheet" href="/static/style.css?v=2">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,8 +14,8 @@
 <body>
     <div class="dashboard-container">
         <header class="dashboard-header">
-            <h1>US Consumer & Demographic Trends <span class="badge">2015-2018</span></h1>
-            <p>Aggregated metrics sourced directly from the BigQuery American Community Survey (ACS) dataset.</p>
+            <h1>US Consumer Economy <span class="badge">2015-2018</span></h1>
+            <p>Simplified National Macro-Indicators from the BigQuery ACS Dataset</p>
         </header>
 
         <div id="loading" class="loader-container">
@@ -29,39 +29,39 @@
         </div>
 
         <main id="dashboards-grid" class="grid-container" style="display: none;">
-            <!-- Dashboard 1: Income vs Employment -->
+            <!-- Dashboard 1: Overall Median Income Trend -->
             <div class="card glassmorphism hover-lift">
-                <h2>1. Median Income vs Profession</h2>
-                <p class="card-desc">Comparing overall median income growth against shifts in key employment sectors.</p>
+                <h2>1. Median Income Trend</h2>
+                <p class="card-desc">Tracking the growth of the overall national median household income.</p>
                 <div class="chart-wrapper">
-                    <canvas id="incomeProfessionChart"></canvas>
+                    <canvas id="incomeTrendChart"></canvas>
                 </div>
             </div>
 
-            <!-- Dashboard 2: Housing Affordability -->
+            <!-- Dashboard 2: Income Bracket Distribution -->
             <div class="card glassmorphism hover-lift">
-                <h2>2. Housing Affordability</h2>
-                <p class="card-desc">National median rent vs. income per capita trends.</p>
+                <h2>2. Income Bracket Distribution</h2>
+                <p class="card-desc">Number of households occupying specific high-earning income brackets.</p>
+                <div class="chart-wrapper">
+                    <canvas id="incomeBracketChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Dashboard 3: Housing Affordability Metrics -->
+            <div class="card glassmorphism hover-lift">
+                <h2>3. Housing Affordability Metrics</h2>
+                <p class="card-desc">Median rent plotted alongside per capita income.</p>
                 <div class="chart-wrapper">
                     <canvas id="housingChart"></canvas>
                 </div>
             </div>
 
-            <!-- Dashboard 3: Sector Shifts -->
+            <!-- Dashboard 4: Employment in Major Sectors -->
             <div class="card glassmorphism hover-lift">
-                <h2>3. Macro Sector Employment Shifts</h2>
-                <p class="card-desc">Comparison of people employed in Arts/Service vs Traditional Manufacturing.</p>
+                <h2>4. Key Employment Sectors</h2>
+                <p class="card-desc">Total employed in Management & Business vs Manufacturing.</p>
                 <div class="chart-wrapper">
                     <canvas id="sectorChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Dashboard 4: Infrastructure Load -->
-            <div class="card glassmorphism hover-lift">
-                <h2>4. Infrastructure & Commuting</h2>
-                <p class="card-desc">Total population growth vs aggregate travel time to work.</p>
-                <div class="chart-wrapper">
-                    <canvas id="infrastructureChart"></canvas>
                 </div>
             </div>
         </main>
@@ -71,6 +71,6 @@
         </footer>
     </div>
     
-    <script src="/static/app.js?v=2"></script>
+    <script src="/static/app.js?v=3"></script>
 </body>
 </html>

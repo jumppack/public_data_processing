@@ -24,14 +24,13 @@ def fetch_dashboard_data() -> list[DashboardDataRecord]:
         SELECT 
             '{year}' as year,
             AVG(median_income) as median_income,
+            SUM(income_50000_59999) as income_bracket_50k_60k,
+            SUM(income_100000_124999) as income_bracket_100k_125k,
+            SUM(income_200000_or_more) as income_bracket_200k_plus,
             AVG(median_rent) as median_rent,
             AVG(income_per_capita) as income_per_capita,
-            SUM(total_pop) as total_population,
             SUM(management_business_sci_arts_employed) as employed_management,
-            SUM(occupation_services) as employed_service,
-            SUM(employed_manufacturing) as employed_manufacturing,
-            SUM(employed_arts_entertainment_recreation_accommodation_food) as employed_arts,
-            SUM(aggregate_travel_time_to_work) as aggregate_travel_time
+            SUM(employed_manufacturing) as employed_manufacturing
         FROM 
             {table_name}
         """
@@ -49,14 +48,13 @@ def fetch_dashboard_data() -> list[DashboardDataRecord]:
             record = DashboardDataRecord(
                 year=row.year,
                 median_income=float(row.median_income or 0),
+                income_bracket_50k_60k=int(row.income_bracket_50k_60k or 0),
+                income_bracket_100k_125k=int(row.income_bracket_100k_125k or 0),
+                income_bracket_200k_plus=int(row.income_bracket_200k_plus or 0),
                 median_rent=float(row.median_rent or 0),
                 income_per_capita=float(row.income_per_capita or 0),
-                total_population=int(row.total_population or 0),
                 employed_management=int(row.employed_management or 0),
-                employed_service=int(row.employed_service or 0),
-                employed_manufacturing=int(row.employed_manufacturing or 0),
-                employed_arts=int(row.employed_arts or 0),
-                aggregate_travel_time=int(row.aggregate_travel_time or 0)
+                employed_manufacturing=int(row.employed_manufacturing or 0)
             )
             results.append(record)
             
