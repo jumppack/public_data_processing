@@ -49,6 +49,8 @@ function renderCharts(data) {
     const medianIncome = data.map(d => d.median_income);
     const empManagement = data.map(d => d.employed_management);
     const empService = data.map(d => d.employed_service);
+    const empArts = data.map(d => d.employed_arts);
+    const empManufacturing = data.map(d => d.employed_manufacturing);
     
     // Chart 1: Income vs Profession
     new Chart(document.getElementById('incomeProfessionChart').getContext('2d'), {
@@ -66,9 +68,33 @@ function renderCharts(data) {
                     yAxisID: 'y'
                 },
                 {
-                    label: 'Management Workers',
+                    label: 'Management/Business',
                     data: empManagement,
                     borderColor: '#10b981',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                },
+                {
+                    label: 'Service Workers',
+                    data: empService,
+                    borderColor: '#f59e0b',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                },
+                {
+                    label: 'Manufacturing',
+                    data: empManufacturing,
+                    borderColor: '#8b5cf6',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                },
+                {
+                    label: 'Arts & Entertainment',
+                    data: empArts,
+                    borderColor: '#ec4899',
                     borderDash: [5, 5],
                     tension: 0.4,
                     yAxisID: 'y1'
