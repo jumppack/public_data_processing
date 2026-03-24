@@ -1,6 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from bigquery_client import fetch_spending_proxies
-from models import SpendingProxyResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from bigquery_client import fetch_dashboard_data
+from models import DashboardDataResponse
+import os
 
 app = FastAPI(
     title="Consumer Spending Trends API",
@@ -8,24 +11,26 @@ app = FastAPI(
     version="1.0.0"
 )
 
-@app.get("/api/v1/sales-trends", response_model=SpendingProxyResponse)
-def get_sales_trends(limit: int = 50):
+# Ensure static directory exists
+os.makedirs("static", exist_ok=True)
+
+# Mount the static directory to serve CSS and JS files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/api/v1/dashboard-data", response_model=DashboardDataResponse)
+def get_dashboard_data():
     """
-    Fetches aggregate consumer spending proxy data.
-    
-    This endpoint executes a query against Google BigQuery's American Community 
-    Survey (ACS) dataset to pull median income and population metrics at the county level 
-    as a proxy for aggregate retail sales and spending capacity.
+    Fetches aggregate multi-year data for all 4 dashboards.
     """
     try:
-        data = fetch_spending_proxies(limit=limit)
-        return SpendingProxyResponse(
+        data = fetch_dashboard_data()
+        return DashboardDataResponse(
             success=True,
             data=data,
             metadata={
-                "source": "bigquery-public-data.census_bureau_acs.county_2020_5yr",
-                "proxy_metric": "median_income",
-                "count": len(data)
+                "source": "bigquery-public-data.census_bureau_acs",
+                "years_covered": ["2015", "2016", "2017", "2018"],
+                "records": len(data)
             }
         )
     except RuntimeError as e:
@@ -34,3 +39,10 @@ def get_sales_trends(limit: int = 50):
     except Exception as e:
         # Fallback for unexpected errors
         raise HTTPException(status_code=500, detail="Internal server error occurred.")
+
+@app.get("/")
+def serve_landing_page():
+    """
+    Serves the main landing page with the 4 dashboards.
+    """
+    return FileResponse("static/index.html")

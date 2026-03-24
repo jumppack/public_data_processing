@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer & Demographic Trends Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>US Consumer & Demographic Trends <span class="badge">2015-2018</span></h1>
+            <p>Aggregated metrics sourced directly from the BigQuery American Community Survey (ACS) dataset.</p>
+        </header>
+
+        <div id="loading" class="loader-container">
+            <div class="spinner"></div>
+            <p>Loading Verified Dataset...</p>
+        </div>
+        
+        <div id="error-message" class="error-container" style="display: none;">
+            <h3>Failed to Load Data</h3>
+            <p id="error-text"></p>
+        </div>
+
+        <main id="dashboards-grid" class="grid-container" style="display: none;">
+            <!-- Dashboard 1: Income vs Employment -->
+            <div class="card glassmorphism hover-lift">
+                <h2>1. Median Income vs Profession</h2>
+                <p class="card-desc">Comparing overall median income growth against shifts in key employment sectors.</p>
+                <div class="chart-wrapper">
+                    <canvas id="incomeProfessionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Dashboard 2: Housing Affordability -->
+            <div class="card glassmorphism hover-lift">
+                <h2>2. Housing Affordability</h2>
+                <p class="card-desc">National median rent vs. income per capita trends.</p>
+                <div class="chart-wrapper">
+                    <canvas id="housingChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Dashboard 3: Sector Shifts -->
+            <div class="card glassmorphism hover-lift">
+                <h2>3. Macro Sector Employment Shifts</h2>
+                <p class="card-desc">Comparison of people employed in Arts/Service vs Traditional Manufacturing.</p>
+                <div class="chart-wrapper">
+                    <canvas id="sectorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Dashboard 4: Infrastructure Load -->
+            <div class="card glassmorphism hover-lift">
+                <h2>4. Infrastructure & Commuting</h2>
+                <p class="card-desc">Total population growth vs aggregate travel time to work.</p>
+                <div class="chart-wrapper">
+                    <canvas id="infrastructureChart"></canvas>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Data Source: <code>bigquery-public-data.census_bureau_acs</code></p>
+        </footer>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>
